@@ -14,30 +14,110 @@ Updated: 2022-04-21 11:45:21
 
 @font-face {
   font-family: Lato;
-  src: url(font/lato-bold-webfont.woff2);
+  src: url(font/lato-regular-webfont.woff2);
+}
+
+@font-face {
+  font-family: Raleway2;
+  src: url(font/raleway-extrabold-webfont.woff2);
+}
+
+@font-face {
+  font-family: Lato2;
+  src: url(font/lato-black-webfont.woff2);
 }
 
 @font-face {
   font-family: Raleway;
-  src: url(font/raleway);
+  src: url(font/raleway-semibold-webfont.woff2);
+}
+
+.site-title {
+  font-family: Lato2;
+}
+
+p {
+  font-family: Lato, sans-serif;
 }
 
 .site-footer {
-  background-color: #147ca6;
+  /* background-color: #147ca6; */
+  background-color: #101c40;
   color: white;
 }
 
-.navbar,
+/* .navbar,
 #site-navigation {
   background-color: #23b7d9;
+} */
+
+.navbar {
+  position: relative;
+  z-index: 200;
+  color: #fff;
+  background: #23b7d9;
+  padding: 18px 0;
+  transition: all 0.5s ease-in-out;
+}
+
+.headroom--not-top .navbar {
+  background: #23b7d9;
+  padding: 12px 0;
 }
 
 .navbar-nav a {
-  font-family: Lato, sans-serif;
+  font-family: Raleway, sans-serif;
 }
 
 #sb-search,
 #searchform,
-button.navbar-toggle:nth-child(3) {
+button.navbar-toggle:nth-child(3),
+.site-info,
+.site-footer-separator {
   display: none;
+}
+
+.has-header-image.home.blog .headroom--not-top .navbar,
+.has-header-image.inspiro-front-page .headroom--not-top .navbar,
+.has-header-video.home.blog .headroom--not-top .navbar,
+.has-header-video.inspiro-front-page .headroom--not-top .navbar {
+  background: #23b7d9;
+  padding: 12px 0;
+}
+
+.navbar-nav > li > ul::before {
+  /* content: '';
+	position: absolute;
+	bottom: 100%;
+	left: 50%;
+	margin-left: -8px;
+	width: 0;
+	height: 0;
+	border-bottom: 8px solid #0bb4aa;
+	border-right: 8px solid transparent;
+	border-left: 8px solid transparent; */
+  display: none;
+}
+
+.navbar-nav ul {
+  left: 50%;
+  width: 220px;
+  margin-top: 15px;
+  border: none;
+  background: #147ca6;
+  /* background: #101c40; */
+  transform: translate(-50%, 0);
+}
+
+#sub-menu {
+  display: block;
+}
+
+.navbar-nav ul a {
+  color: #fff;
+  padding: 8px 15px;
+}
+
+.navbar-nav ul a:hover {
+  color: #23b7d9;
 }
