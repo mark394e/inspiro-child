@@ -13,5 +13,10 @@ Updated: 2022-04-21 11:45:21
 @import url("../inspiro/style.css");
 
 .site-footer {
-  background-color: aqua;
+  background-color: darkblue;
+  color: white;
+}
+
+.navbar {
+  background-color: lightblue;
 }
