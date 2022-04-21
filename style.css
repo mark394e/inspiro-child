@@ -12,6 +12,16 @@ Updated: 2022-04-21 11:45:21
 */
 @import url("../inspiro/style.css");
 
+@font-face {
+  font-family: Lato;
+  src: url(font/lato-bold-webfont.woff2);
+}
+
+@font-face {
+  font-family: Raleway;
+  src: url(font/raleway);
+}
+
 .site-footer {
   background-color: #147ca6;
   color: white;
@@ -20,4 +30,14 @@ Updated: 2022-04-21 11:45:21
 .navbar,
 #site-navigation {
   background-color: #23b7d9;
+}
+
+.navbar-nav a {
+  font-family: Lato, sans-serif;
+}
+
+#sb-search,
+#searchform,
+button.navbar-toggle:nth-child(3) {
+  display: none;
 }
