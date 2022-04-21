@@ -17,6 +17,7 @@ Updated: 2022-04-21 11:45:21
   color: white;
 }
 
-.navbar {
+.navbar,
+#site-navigation {
   background-color: #23b7d9;
 }
