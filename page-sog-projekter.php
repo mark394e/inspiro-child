@@ -29,7 +29,8 @@ get_header();
         <h2 class="projekt_titel"></h2>
         <p class="teaser_tekst"></p>
         <p class="projekt_beskriv"></p>
-        <p class="til_lærerer"></p>
+        <p class="til_lærererne"></p>
+        <p class="til_elever"></p>
       </article>
     </section>
 
@@ -92,11 +93,11 @@ margin-bottom: 100px;
     border-radius: 8px;
     transition-duration: 0.4s;
     place-content: center;
-	background-color: #07678d;
+	background-color: #23b7d9;
   }
 
   article:hover {
-    box-shadow: 5px 5px #d87236;
+    box-shadow: 5px 5px #147ca6;
   }
 
   main {
@@ -118,10 +119,9 @@ margin-bottom: 100px;
   #popup article {
       width: 70vw;
       height: 500px;
-      margin: 4rem auto;
+      margin: 12rem auto;
       border-radius: 25px;
       padding: 12px;
-      background-color: #07678d;
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 200px 100px;
