@@ -69,8 +69,8 @@ p {
   font-family: Raleway, sans-serif;
 }
 
-#sb-search,
-#searchform,
+/* #sb-search,
+#searchform, */
 button.navbar-toggle:nth-child(3),
 .site-info,
 .site-footer-separator {
