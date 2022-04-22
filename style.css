@@ -32,6 +32,18 @@ Updated: 2022-04-21 11:45:21
   src: url(font/raleway-semibold-webfont.woff2);
 }
 
+.premium-blog-entry-meta,
+.entry-meta {
+  display: none;
+}
+
+body:not(.page-layout-sidebar-right) #primary {
+  max-width: calc(950px + 300px);
+  margin: 0 auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 .site-title {
   font-family: Lato2;
 }

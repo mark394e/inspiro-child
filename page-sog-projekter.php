@@ -12,25 +12,33 @@
 get_header();
 ?>
 
-<nav id="filtrering"><button data-artist="alle">Alle</button></nav>
+<h1 class="entry-title">Søg projekter</h1>
+
+<nav id="filtrering"><button data-projekt="alle">Alle</button></nav>
 
  <section id="popup">
       <div id="luk">&#x2715 </div>
       <article>
         <img src="" alt="" class="billede" />
-        <h2 class="navn"></h2>
-        <p class="langtekst"></p>
-        <p class="udvalgt"></p>
-        <p class="influencer"></p>
+        <div>
+          <p class="verdensmaal">Fokus:</p>
+          <p class="uddannelsestrin">Udannelsestrin:</p>
+          <p class="skolenavn">Skolenavn:</p>
+          <p class="kontakt">Kontakt:</p>
+        </div>
+        <h2 class="projekt_titel"></h2>
+        <p class="teaser_tekst"></p>
+        <p class="projekt_beskriv"></p>
+        <p class="til_lærerer"></p>
       </article>
     </section>
 
 <template class="loopview">
           <article>
             <img src="" alt="" class="billede" />
-            <h2 class="navn"></h2>
-            <p class="genre"></p>
-            <p class="korttekst"></p>
+            <h2 class="projekt_titel"></h2>
+            <p class="teaser_tekst"></p>
+            <p class="verdensmaal"></p>
           </article>
       </template>
 
@@ -39,6 +47,17 @@ get_header();
 
 		</main><!-- #main -->
 		<style>
+
+.page .entry-title, .page-title {
+	margin-top: 45px;
+	color: #222;
+	font-size: 26px;
+	font-size: 1.625rem;
+	font-weight: 700;
+	text-align: center;
+	font-family: Montserrat,sans-serif;
+	text-transform: uppercase;
+}
 
 #filtrering{
 	display: flex;
@@ -62,7 +81,7 @@ margin-bottom: 100px;
 
 			 main {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 50px;
     margin-top: 40px;
   }
@@ -152,8 +171,8 @@ function start() {
 
   // Definerer stien til json-array fra restdb i stedet for lokal .json-fil
   // Henter 2 collections fra samme database
-  const url = "http://hoffmannlund.dk/kea/09_CMS/passionsite/wp-json/wp/v2/artist?per_page=100";
-  const catUrl = "http://hoffmannlund.dk/kea/09_CMS/passionsite/wp-json/wp/v2/categories"
+  const url = "http://hoffmannlund.dk/kea/09_CMS/unesco-asp/wp-json/wp/v2/projekt?per_page=100";
+  const catUrl = "http://hoffmannlund.dk/kea/09_CMS/unesco-asp/wp-json/wp/v2/categories?per_page=100";
 //   const url2 = "https://passion-410f.restdb.io/rest/omos";
 
   
@@ -167,8 +186,7 @@ function start() {
   const lukKnap = document.querySelector("#luk");
   const header = document.querySelector("h1");
 
-  let bloggere;
-  let artister;
+  let projekter;
   let filter = "alle";
   let categories;
 
@@ -224,13 +242,13 @@ function start() {
     const respons = await fetch(url);
 	const catData = await fetch(catUrl);
     // const respons2 = await fetch(url2, options);
-    artister = await respons.json();
+    projekter = await respons.json();
 	categories = await catData.json();
     // bloggere = await respons2.json();
-    console.log("Artister", artister);
+    console.log("Projekter", projekter);
 	console.log("Kategorier", categories);
     // console.log("Bloggere", bloggere);
-    visArtister();
+    visProjekter();
 	opretKnapper();
     // visBloggere();
   }
@@ -251,10 +269,10 @@ function start() {
 		};
 
 		function filtrering(){
-			filter = this.dataset.artist;
+			filter = this.dataset.projekt;
 			console.log(filter);
 
-			visArtister();
+			visProjekter();
 		}
 
 //   function visBloggere() {
@@ -285,23 +303,23 @@ function start() {
 //   }
 
   // loop'er gennem alle artister i json-arrayet
-  function visArtister() {
-    console.log("visArtister");
+  function visProjekter() {
+    console.log("visProjekter");
 
     main.textContent = ""; // Her resetter jeg DOM'en ved at tilføje en tom string
 
     // for hver artist i arrayet, skal der tjekkes om de opfylder filter-kravet og derefter vises i DOM'en.
-    artister.forEach((artist) => {
-      if (filter == "alle" || artist.categories.includes(parseInt(filter))) {
+    projekter.forEach((projekt) => {
+      if (filter == "alle" || projekt.categories.includes(parseInt(filter))) {
         const klon = template.cloneNode(true);
-        klon.querySelector(".billede").src = artist.billede.guid;
-        klon.querySelector(".navn").textContent = artist.title.rendered;
-        klon.querySelector(".korttekst").textContent = artist.kort_beskriv;
-        klon.querySelector(".genre").textContent = artist.genre;
+        klon.querySelector(".billede").src = projekt.billede.guid;
+        klon.querySelector(".projekt_titel").textContent = projekt.title.rendered;
+        klon.querySelector(".teaser_tekst").textContent = projekt.teaser_tekst;
+        klon.querySelector(".verdensmaal").textContent = projekt.verdensmaal;
         // tilføjer eventlistner til hvert article-element og lytter efter klik på artiklerne. Funktionen "visDetaljer" bliver kaldt ved klik.
         klon
           .querySelector("article")
-          .addEventListener("click", () => visDetaljer(artist));
+          .addEventListener("click", () => visDetaljer(projekt));
 
         // tilføjer klon-template-elementet til main-elementet (så det hele vises i DOM'en)
         main.appendChild(klon);
