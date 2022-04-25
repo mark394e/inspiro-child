@@ -24,7 +24,7 @@ get_header();
 </nav>
 
  <section id="popup">
-      <div id="luk">&#x2715 </div>
+           <div id="luk">&#x2715 </div>
       <article>
         <img src="" alt="" class="billede" />
         <div>
@@ -36,14 +36,16 @@ get_header();
         <h2 class="projekt_titel"></h2>
         <p class="teaser_tekst"></p>
         <p class="projekt_beskriv"></p>
-        <p class="til_lærererne"></p>
+        <p class="til_laererne"></p>
         <p class="til_elever"></p>
       </article>
     </section>
 
 <template class="loopview">
           <article>
+            <div class="img_box">
             <img src="" alt="" class="billede" />
+            </div>
             <h2 class="projekt_titel"></h2>
             <p class="teaser_tekst"></p>
             <p class="verdensmaal"></p>
@@ -55,6 +57,8 @@ get_header();
 
 		</main><!-- #main -->
 		<style>
+
+
 
 .dropbtn {
 	width: 250px;
@@ -103,10 +107,6 @@ justify-content: center;
 margin-bottom: 50px;
 }
 
- main {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
 
 .projekt_titel {
   color: #0bb4aa;
@@ -117,12 +117,7 @@ margin-bottom: 50px;
   color: #777;
 }
 
- main {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 5px;
 
-}
 
   article {
      padding: 10px;
@@ -136,9 +131,17 @@ margin-bottom: 50px;
   } */
 
   main {
-    max-width: 1200px;
-    margin: auto 20px auto 20px;
+    max-width: 1000px;
+    /* margin: auto 20px auto 20px; */
   }
+
+   main {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 5px;
+    margin: 0 auto;
+
+}
 
   #popup {
     display: none;
@@ -146,9 +149,8 @@ margin-bottom: 50px;
     left: 0;
     top: 0;
     width: 100vw;
-    height: 100vh;
     background-color: rgba(0, 0, 0, 0.8);
-    overflow: scroll;
+    overflow: auto;
   }
 
   #popup article {
@@ -183,10 +185,10 @@ margin-bottom: 50px;
 
   #luk {
     position: fixed;
-padding: 2em 0 0 5.5em;
+padding: 6.25em 0 0 7.5em;
 font-size: 2em;
 font-weight: bolder;
-color: white;
+color: black;
 cursor: pointer;
   }
 
@@ -197,6 +199,11 @@ cursor: pointer;
   .langtekst{
 	  font-size: 0.8rem;
   }
+
+.img_box{
+  padding: 0;
+}
+
 		</style>
 <script>
 	// Tjekker om DOM'en er loaded før siden vises
@@ -288,19 +295,20 @@ function start() {
   }
 
   // tilføjer objekter fra arrayet (for hver artist) til popup-vindue. Samt sætter cursor til default, så man ikke tror man kan klikke på elementet igen.
-  function visDetaljer(artist) {
-    console.log(artist);
+  function visDetaljer(projekt) {
+    console.log(projekt);
     // document.querySelector(".nav").style.position = "inherit";
     article.style.cursor = "default";
     popup.style.display = "block";
-    popup.querySelector(".billede").src = artist.billede.guid;
+    popup.querySelector(".billede").src = projekt.billede.guid;
     popup.querySelector(".billede").style.maxWidth = "50%";
     // popup.querySelector("iframe").src = artist.lyd;
-    popup.querySelector(".navn").textContent = artist.title.rendered;
-    popup.querySelector(".langtekst").textContent = artist.lang_beskriv;
-    popup.querySelector(".udvalgt").textContent = "Lyt til: " + artist.udvalgt;
-    popup.querySelector(".influencer").textContent =
-      "Udvalgt af " + artist.influencer;
+    popup.querySelector(".projekt_titel").textContent = projekt.title.rendered;
+    popup.querySelector(".teaser_tekst").textContent = projekt.teaser_tekst;
+    popup.querySelector(".projekt_beskriv").textContent = projekt.beskrivelse_af_projekt;
+    popup.querySelector(".til_laererne").textContent = projekt.til_laererne;
+    popup.querySelector(".til_elever").textContent = projekt.til_elev;
+
   }
 
   // ved klik på luk-knappen forsvinder popup-vindue
