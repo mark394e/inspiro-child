@@ -14,7 +14,14 @@ get_header();
 
 <h1 class="entry-title">Søg projekter</h1>
 
-<nav id="filtrering"><button data-projekt="alle">Alle</button></nav>
+<nav id="filtrering">
+ <div class="dropdown_projekt">
+  <button onclick="myFunction()" class="dropbtn">Vælg Verdensmål</button>
+  <div id="myDropdown" class="dropdown-content">
+    <button data-projekt="alle">Alle</button>
+  </div>
+</div> 
+</nav>
 
  <section id="popup">
       <div id="luk">&#x2715 </div>
@@ -49,6 +56,36 @@ get_header();
 		</main><!-- #main -->
 		<style>
 
+.dropbtn {
+	width: 250px;
+	display: grid;
+	place-self: center;
+  margin-bottom: 5px;
+}
+
+.dropdown_projekt {
+  position: relative;
+  /* display: inline-block; */
+  display: grid;
+}
+
+.dropdown-content {
+  display: none;
+  /* position: absolute; */
+  /* background-color: #f6f6f6; */
+  min-width: 230px;
+  /* border: 1px solid #ddd; */
+  /* z-index: 1; */
+  height: 400px;
+  overflow: auto;
+}
+
+.show {
+  display: grid;
+  gap: 5px;
+}
+
+
 .page .entry-title, .page-title {
 	margin-top: 45px;
 	color: #222;
@@ -62,8 +99,8 @@ get_header();
 
 #filtrering{
 	display: flex;
-justify-content: right;
-margin-bottom: 100px;
+justify-content: center;
+margin-bottom: 50px;
 }
 
  main {
@@ -71,34 +108,32 @@ margin-bottom: 100px;
     margin: 0 auto;
   }
 
-.navn {
-  color: #d87236;
+.projekt_titel {
+  color: #0bb4aa;
 }
 
-.genre,
-.korttekst {
-  color: #f2f2f2;
+.teaser_tekst,
+.verdensmaal {
+  color: #777;
 }
 
-			 main {
+ main {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 50px;
-    margin-top: 40px;
-  }
+    gap: 5px;
+
+}
 
   article {
      padding: 10px;
     cursor: pointer;
-    border-radius: 8px;
-    transition-duration: 0.4s;
     place-content: center;
-	background-color: #23b7d9;
+	background-color: #f5f5f5;
   }
 
-  article:hover {
+  /* article:hover {
     box-shadow: 5px 5px #147ca6;
-  }
+  } */
 
   main {
     max-width: 1200px;
@@ -190,53 +225,6 @@ function start() {
   let filter = "alle";
   let categories;
 
-//   // Lytter efter "klik" på menu-knap til burgermenu
-//   document.querySelector("#menuknap").addEventListener("click", toggleMenu);
-
-//   // Toggler klassen "hidden" hver gang der klikkes på menu-knappen
-//   function toggleMenu() {
-//     console.log("toggleMenu");
-//     document.querySelector("#menu").classList.toggle("hidden");
-
-//     let erSkjult = document.querySelector("#menu").classList.contains("hidden");
-
-//     // Ændre menu-knappens "udseende" alt efter om burgermenuen er skjult eller ej
-//     if (erSkjult == true) {
-//       document.querySelector("#menuknap").textContent = "☰";
-//     } else {
-//       document.querySelector("#menuknap").textContent = "X";
-//     }
-//   }
-
-//   const filterKnapper = document.querySelectorAll(".nav button");
-
-//   const filterKnapperBurger = document.querySelectorAll("#menu button");
-
-//   //  sætter eventlistener på alle knapper i burgermenu og lytter efter klik på knapperne
-//   filterKnapperBurger.forEach((knap) =>
-//     knap.addEventListener("click", filtrerInfluencer)
-//   );
-
-//   // sætter eventlistener på alle knapper i nav'en og lytter efter klik på knapperne
-//   filterKnapper.forEach((knap) =>
-//     knap.addEventListener("click", filtrerInfluencer)
-//   );
-
-//   // sætter filter til at være ligmed den data-attribut vi har defineret i HTML; Markus, Sandra, Filippa eller Dino
-//   function filtrerInfluencer() {
-//     console.log("filtrerInfluencer");
-//     filter = this.dataset.influencer;
-
-//     // fjerner klassen .valgt og lægger den til den knap der er trykket på
-//     document.querySelector(".valgt").classList.remove("valgt");
-//     this.classList.add("valgt");
-//     visArtister();
-//     visBloggere();
-
-//     // jeg sætter h1'erens tekstindhold ligmed tekstindholdet af den knap der er trykket på
-//     header.textContent = this.textContent;
-//   }
-
   // Henter json-data fra restdb via fetch() fra to forskellige collections i samme database
   async function hentData() {
     const respons = await fetch(url);
@@ -257,13 +245,13 @@ function start() {
 	  console.log("opretKnapper");
 
 	  categories.forEach(cat => {
-		  document.querySelector("#filtrering").innerHTML +=`<button class="filter" data-artist="${cat.id}">${cat.name}</button>`
+		  document.querySelector("#myDropdown").innerHTML +=`<button class="filter" data-projekt="${cat.id}">${cat.name}</button>`
 	  })
 	  addEventListenersToButtons();
   }
 
   function addEventListenersToButtons(){
-			document.querySelectorAll("#filtrering button").forEach(elm =>{
+			document.querySelectorAll("#myDropdown button").forEach(elm =>{
 				elm.addEventListener("click", filtrering);
 			})
 		};
@@ -271,36 +259,8 @@ function start() {
 		function filtrering(){
 			filter = this.dataset.projekt;
 			console.log(filter);
-
 			visProjekter();
 		}
-
-//   function visBloggere() {
-//     console.log("visBloggere");
-
-//     section.textContent = ""; // Her resetter jeg DOM'en ved at tilføje en tom string
-
-//     // for hver blogger i arrayet, skal der tjekkes om de opfylder filter-kravet og derefter vises i DOM'en.
-//     bloggere.forEach((blogger) => {
-//       if (filter == blogger.influencer) {
-//         document.querySelector(".tekstOmAlle p").textContent = "";
-//         const klon2 = template2.cloneNode(true);
-//         klon2.querySelector(".bloggerBillede").src =
-//           "img/" + blogger.billede2 + ".jpg";
-//         klon2.querySelector(".bloggerTekst").textContent = blogger.omos;
-
-//         // tilføjer klon-template-elementet til section-elementet (så det hele vises i DOM'en)
-//         section.appendChild(klon2);
-//         // tilføjer section-elementet til min "header" der har klassen .splash
-//         document.querySelector(".splash").appendChild(section);
-//       }
-//       // Hvis filteret er sat til alle, indsættes denne tekst
-//       else if (filter == "alle") {
-//         document.querySelector(".tekstOmAlle p").textContent =
-//           "Fire af landets mest etablerede musikbloggere fra hovedstaden peger på deres 2022 favoritter. Se deres nøje udvalgte bands og artister, og læs hvorfor netop disse kunstnere kommer til at blinke på stjernehimlen i det nye år. Bliv inspireret af både etablerede og nye acts, som forhåbentligt leverer flere hits i 2022.";
-//       }
-//     });
-//   }
 
   // loop'er gennem alle artister i json-arrayet
   function visProjekter() {
@@ -343,7 +303,7 @@ function start() {
       "Udvalgt af " + artist.influencer;
   }
 
-//   // ved klik på luk-knappen forsvinder popup-vindue
+  // ved klik på luk-knappen forsvinder popup-vindue
   lukKnap.addEventListener("click", () => (popup.style.display = "none"));
   lukKnap.addEventListener(
     "click",
@@ -351,6 +311,12 @@ function start() {
   );
   hentData();
 }
+
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+
 </script>
 	</div><!-- #primary -->
 
