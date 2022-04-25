@@ -82,12 +82,12 @@ p {
 }
 
 /* #sb-search,
-#searchform, */
+#searchform,
 button.navbar-toggle:nth-child(3),
 .site-info,
 .site-footer-separator {
-  display: none;
-}
+  display: none; 
+} */
 
 .has-header-image.home.blog .headroom--not-top .navbar,
 .has-header-image.inspiro-front-page .headroom--not-top .navbar,

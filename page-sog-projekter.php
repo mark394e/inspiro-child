@@ -286,7 +286,7 @@ function start() {
         // tilføjer eventlistner til hvert article-element og lytter efter klik på artiklerne. Funktionen "visDetaljer" bliver kaldt ved klik.
         klon
           .querySelector("article")
-          .addEventListener("click", () => visDetaljer(projekt));
+          .addEventListener("click", () => {location.href = projekt.link});
 
         // tilføjer klon-template-elementet til main-elementet (så det hele vises i DOM'en)
         main.appendChild(klon);
