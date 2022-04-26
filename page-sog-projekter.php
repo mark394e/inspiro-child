@@ -264,6 +264,8 @@ function start() {
 		};
 
 		function filtrering(){
+      console.log("filtrering");
+      document.getElementById("myDropdown").classList.toggle("show")
 			filter = this.dataset.projekt;
 			console.log(filter);
 			visProjekter();
