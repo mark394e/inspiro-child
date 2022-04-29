@@ -12,26 +12,6 @@ Updated: 2022-04-21 11:45:21
 */
 @import url("../inspiro/style.css");
 
-@font-face {
-  font-family: Lato;
-  src: url(font/lato-regular-webfont.woff2);
-}
-
-@font-face {
-  font-family: Raleway2;
-  src: url(font/raleway-extrabold-webfont.woff2);
-}
-
-@font-face {
-  font-family: Lato2;
-  src: url(font/lato-black-webfont.woff2);
-}
-
-@font-face {
-  font-family: Raleway;
-  src: url(font/raleway-semibold-webfont.woff2);
-}
-
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap");
 
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans&display=swap");
@@ -52,24 +32,9 @@ body:not(.page-layout-sidebar-right) #primary {
   padding-right: 10px;
 }
 
-.site-title {
-  font-family: Lato2;
-}
-
 p {
   font-family: "Plus Jakarta Sans", sans-serif !important;
 }
-
-.site-footer {
-  /* background-color: #147ca6; */
-  background-color: #101c40;
-  color: white;
-}
-
-/* .navbar,
-#site-navigation {
-  background-color: #23b7d9;
-} */
 
 .navbar {
   position: relative;
@@ -86,16 +51,8 @@ p {
 }
 
 .navbar-nav a {
-  font-family: Raleway, sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif !important;
 }
-
-/* #sb-search,
-#searchform,
-button.navbar-toggle:nth-child(3),
-.site-info,
-.site-footer-separator {
-  display: none; 
-} */
 
 .has-header-image.home.blog .headroom--not-top .navbar,
 .has-header-image.inspiro-front-page .headroom--not-top .navbar,
@@ -106,16 +63,6 @@ button.navbar-toggle:nth-child(3),
 }
 
 .navbar-nav > li > ul::before {
-  /* content: '';
-	position: absolute;
-	bottom: 100%;
-	left: 50%;
-	margin-left: -8px;
-	width: 0;
-	height: 0;
-	border-bottom: 8px solid #0bb4aa;
-	border-right: 8px solid transparent;
-	border-left: 8px solid transparent; */
   display: none;
 }
 
@@ -162,65 +109,12 @@ button:hover {
   display: block;
 }
 
-@media only screen and (max-width: 600px) {
-  .inspiro--with-page-nav .navbar-toggle {
-    display: block;
-  }
-
-  .primary-menu-wrapper {
-    display: none;
-  }
-
-  .mobile-menu-wrapper #sub-menu {
-    display: inline !important;
-  }
-
-  #content {
-    padding-top: 40px;
-  }
-  .side-nav .navbar-nav ul {
-    display: none;
-    margin-left: 130px;
-  }
-
-  .navbar-nav ul {
-    left: 50%;
-    width: 270px;
-    margin-top: 15px;
-    border: none;
-    transform: translate(-50%, 0);
-  }
-
-  .navbar-nav ul li {
-    border: none;
-    padding: 5px;
-    margin: 7px 0;
-  }
-
-  .navbar-nav li li a {
-    color: #f2f4f6;
-  }
-
-  .navbar-nav > li.current-menu-item > a,
-  .navbar-nav > li.current-menu-parent > a,
-  .navbar-nav > li.current_page_item > a {
-    color: #080073;
-  }
-
-  .side-nav .navbar-nav li.menu-item-has-children > a .svg-icon {
-    float: right;
-    fill: #f2f4f6;
-    height: 26px;
-    width: 26px;
-    margin: 4px 0 0 10px;
-    transition: 0.1s ease color, 0.5s ease transform;
-  }
-}
-
+/* Baggrundsfarve til pages */
 .site-content-contain {
   background-color: #f2f4f6;
 }
 
+/* Diverse knapper */
 .elementor-111 .elementor-element.elementor-element-8dc119f .premium-button,
 .elementor-111
   .elementor-element.elementor-element-8dc119f
@@ -238,7 +132,7 @@ button:hover {
   color: #fff;
   border: none;
 }
-
+/* Diverse knapper */
 .elementor-111
   .elementor-element.elementor-element-8dc119f
   .premium-button-none:hover,
@@ -309,14 +203,72 @@ button:hover {
   cursor: default;
 }
 
+/* Forside titel */
 .site-title > a:nth-child(1) {
   pointer-events: none;
   cursor: default;
   font-family: "Inter", sans-serif !important;
 }
 
+/* Burgermenu */
 .side-nav__scrollable-container {
   background-color: #23b7d9;
   color: #f2f4f6;
   border: 2px solid #147ca6;
+}
+
+/* -------- Media query til mobil -------- */
+@media only screen and (max-width: 600px) {
+  .inspiro--with-page-nav .navbar-toggle {
+    display: block;
+  }
+
+  .primary-menu-wrapper {
+    display: none;
+  }
+
+  .mobile-menu-wrapper #sub-menu {
+    display: inline !important;
+  }
+
+  #content {
+    padding-top: 40px;
+  }
+  .side-nav .navbar-nav ul {
+    display: none;
+    margin-left: 130px;
+  }
+
+  .navbar-nav ul {
+    left: 50%;
+    width: 270px;
+    margin-top: 15px;
+    border: none;
+    transform: translate(-50%, 0);
+  }
+
+  .navbar-nav ul li {
+    border: none;
+    padding: 5px;
+    margin: 7px 0;
+  }
+
+  .navbar-nav li li a {
+    color: #f2f4f6;
+  }
+
+  .navbar-nav > li.current-menu-item > a,
+  .navbar-nav > li.current-menu-parent > a,
+  .navbar-nav > li.current_page_item > a {
+    color: #080073;
+  }
+
+  .side-nav .navbar-nav li.menu-item-has-children > a .svg-icon {
+    float: right;
+    fill: #f2f4f6;
+    height: 26px;
+    width: 26px;
+    margin: 4px 0 0 10px;
+    transition: 0.1s ease color, 0.5s ease transform;
+  }
 }

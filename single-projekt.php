@@ -17,6 +17,7 @@ get_header();
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main">
 
+    <!-- Singleview article  -->
     <article>
       <div class="col_left">
         <img src="" alt="" class="billede" />
@@ -63,6 +64,7 @@ article{
 
   let projekt;
 
+  // Henter data for det pågældende projekt ved at hente projektets ID vha. echo php-snippet
   const dbUrl = "http://hoffmannlund.dk/kea/09_CMS/unesco-asp/wp-json/wp/v2/projekt/" + <?php echo get_the_ID() ?>;
   console.log(dbUrl)
 
@@ -73,6 +75,7 @@ article{
     visProjekter();
   }
 
+  // Udfykder article med billede og tekster indsat i custom pods i wordpress
   function visProjekter(){
     console.log("visProjekt")
     document.querySelector(".billede").src = projekt.billede.guid;

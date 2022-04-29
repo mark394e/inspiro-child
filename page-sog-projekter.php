@@ -21,13 +21,15 @@ På siden findes projekter indsendt af danske UNESCO verdensmålsskoler. Projekt
 
 <nav id="filtrering">
  <div class="dropdown_projekt">
-  <button onclick="myFunction()" class="dropbtn">Vælg Verdensmål</button>
+   <!-- benytter 'onclick' attribut for at gå direkte til funktionen -->
+  <button onclick="openDropdown()" class="dropbtn">Vælg Verdensmål</button>
   <div id="myDropdown" class="dropdown-content">
     <button data-projekt="alle">Alle</button>
   </div>
 </div> 
 </nav>
 
+<!-- Hvis vi sletter denne section, så virker siden ikke. Dog bliver popup-vinduet ikke brugt -->
  <section id="popup">
            <div id="luk">&#x2715 </div>
       <article>
@@ -63,6 +65,8 @@ På siden findes projekter indsendt af danske UNESCO verdensmålsskoler. Projekt
 		</main><!-- #main -->
 		<style>
 
+
+/* ------- Media query for desktop ------- */
 @media only screen and (min-width: 1000px) {
 .soeg_projekt {
    display: grid;
@@ -74,8 +78,6 @@ På siden findes projekter indsendt af danske UNESCO verdensmålsskoler. Projekt
   grid-column: 2/3;
   grid-row: 1/3;
   place-self: start center;
-  color: #080073;
-  font-family: "Inter", sans-serif !important;
 }
 
 .soeg_projekt p{
@@ -92,6 +94,7 @@ color: #080073;
   padding-left: 45px;
 }
 
+/* ------- Media query for mobil ------- */
 @media only screen and (max-width: 600px){
   .soeg_projekt p{
   padding: 0 20px 0 20px;
@@ -165,9 +168,6 @@ margin-bottom: 50px;
 	background-color: #64A8DE;
   }
 
-  /* article:hover {
-    box-shadow: 5px 5px #147ca6;
-  } */
 
   main {
     max-width: 1000px;
@@ -269,7 +269,7 @@ function start() {
   let filter = "alle";
   let categories;
 
-  // Henter json-data fra wordpress via fetch() fra to forskellige collections i samme database
+  // Henter json-data fra wordpress via fetch()
   async function hentData() {
     const respons = await fetch(url);
 	const catData = await fetch(catUrl);
@@ -281,6 +281,7 @@ function start() {
 	opretKnapper();
   }
 
+// oprette knapper i dropdown-menu med id og nanv for hver kategori
   function opretKnapper(){
 	  console.log("opretKnapper");
 
@@ -290,12 +291,14 @@ function start() {
 	  addEventListenersToButtons();
   }
 
+  // tilføjer eventListener til hver knap i dropdown-menu
   function addEventListenersToButtons(){
 			document.querySelectorAll("#myDropdown button").forEach(elm =>{
 				elm.addEventListener("click", filtrering);
 			})
 		};
 
+    // ved klik på knap, sættes filter til den valgte kategori
 		function filtrering(){
       console.log("filtrering");
       document.getElementById("myDropdown").classList.toggle("show")
@@ -319,7 +322,9 @@ function start() {
         klon.querySelector(".teaser_tekst").textContent = projekt.teaser_tekst;
         klon.querySelector(".verdensmaal").textContent = projekt.verdensmaal;
 
-        // tilføjer eventlistner til hvert article-element og lytter efter klik på artiklerne. Ved klik sendes man videre til single-projekt.php
+        // tilføjer eventlistner til hvert article-element og lytter efter klik på artiklerne. 
+        // Ved klik sendes man videre til single-projekt.php
+        // 
         klon
           .querySelector("article")
           .addEventListener("click", () => {location.href = projekt.link});
@@ -330,17 +335,11 @@ function start() {
     });
   }
 
-
-  // ved klik på luk-knappen forsvinder popup-vindue
-  lukKnap.addEventListener("click", () => (popup.style.display = "none"));
-  lukKnap.addEventListener(
-    "click",
-    () => (document.querySelector(".nav").style.position = "sticky")
-  );
   hentData();
 }
 
-function myFunction() {
+// funktionen åbner dropdown menu og scroller til et relevant punkt på siden
+function openDropdown() {
   document.getElementById("myDropdown").classList.toggle("show");
   let mobil_viewport = window.matchMedia("(max-width: 600px)");
   if (mobil_viewport.matches) {
@@ -357,7 +356,6 @@ function myFunction() {
 });
 }
 }
-
 
 </script>
 	</div><!-- #primary -->
