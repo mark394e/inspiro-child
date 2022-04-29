@@ -12,7 +12,12 @@
 get_header();
 ?>
 
-<h1 class="entry-title">Søg projekter</h1>
+<div class="soeg_projekt">
+<h1>SØG PROJEKTER</h1>
+<p>
+På siden findes projekter indsendt af danske UNESCO verdensmålsskoler. Projekterne er alle med udgangspunkt i FNs 17 verdensmål og kan bruges som inspiration og motivation samt udgøre grundlaget for eksempelvis skoleprojekter, undersøgelser eller lignende.
+</p>
+</div>
 
 <nav id="filtrering">
  <div class="dropdown_projekt">
@@ -58,7 +63,41 @@ get_header();
 		</main><!-- #main -->
 		<style>
 
+@media only screen and (min-width: 1000px) {
+.soeg_projekt {
+   display: grid;
+  grid-template-columns: 1fr 620px 1fr;
+  grid-template-rows: 100px 1fr;
+}
 
+.soeg_projekt h1 {
+  grid-column: 2/3;
+  grid-row: 1/3;
+  place-self: start center;
+  color: #080073;
+  font-family: "Inter", sans-serif !important;
+}
+
+.soeg_projekt p{
+  grid-column: 2/3;
+grid-row: 2/3;
+place-self: center;
+color: #080073;
+}
+}
+
+.soeg_projekt h1{
+    color: #080073;
+  font-family: "Inter", sans-serif !important;
+  padding-left: 45px;
+}
+
+@media only screen and (max-width: 600px){
+  .soeg_projekt p{
+  padding: 0 20px 0 20px;
+  color: #080073;
+}
+}
 
 .dropbtn {
 	width: 250px;
@@ -109,21 +148,21 @@ margin-bottom: 50px;
 
 
 .projekt_titel {
-  color: #0bb4aa;
+  color: #080073;
+  font-size: 1.5rem;
+  padding-top: 0;
 }
 
 .teaser_tekst,
 .verdensmaal {
-  color: #777;
+  color: #F2F4F6;
 }
-
-
 
   article {
      padding: 10px;
     cursor: pointer;
     place-content: center;
-	background-color: #f5f5f5;
+	background-color: #64A8DE;
   }
 
   /* article:hover {
@@ -138,10 +177,10 @@ margin-bottom: 50px;
    main {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 5px;
+    gap: 30px;
     margin: 0 auto;
-
 }
+
 
   #popup {
     display: none;
@@ -211,41 +250,35 @@ window.addEventListener("DOMContentLoaded", start);
 function start() {
   console.log("start");
 
-  // Definerer stien til json-array fra restdb i stedet for lokal .json-fil
-  // Henter 2 collections fra samme database
+  // Definerer stien til json-array fra wordpress
   const url = "http://hoffmannlund.dk/kea/09_CMS/unesco-asp/wp-json/wp/v2/projekt?per_page=100";
   const catUrl = "http://hoffmannlund.dk/kea/09_CMS/unesco-asp/wp-json/wp/v2/categories?per_page=100";
-//   const url2 = "https://passion-410f.restdb.io/rest/omos";
 
   
   // definere globale variable
   const main = document.querySelector("main");
   const section = document.querySelector(".infoBoks");
   const template = document.querySelector(".loopview").content;
-//   const template2 = document.querySelector(".bloggerBoks").content;
   const popup = document.querySelector("#popup");
   const article = document.querySelector("article");
   const lukKnap = document.querySelector("#luk");
   const header = document.querySelector("h1");
 
+  
   let projekter;
   let filter = "alle";
   let categories;
 
-  // Henter json-data fra restdb via fetch() fra to forskellige collections i samme database
+  // Henter json-data fra wordpress via fetch() fra to forskellige collections i samme database
   async function hentData() {
     const respons = await fetch(url);
 	const catData = await fetch(catUrl);
-    // const respons2 = await fetch(url2, options);
     projekter = await respons.json();
 	categories = await catData.json();
-    // bloggere = await respons2.json();
     console.log("Projekter", projekter);
 	console.log("Kategorier", categories);
-    // console.log("Bloggere", bloggere);
     visProjekter();
 	opretKnapper();
-    // visBloggere();
   }
 
   function opretKnapper(){
@@ -271,13 +304,13 @@ function start() {
 			visProjekter();
 		}
 
-  // loop'er gennem alle artister i json-arrayet
+  // loop'er gennem alle projekter i json-arrayet
   function visProjekter() {
     console.log("visProjekter");
 
     main.textContent = ""; // Her resetter jeg DOM'en ved at tilføje en tom string
 
-    // for hver artist i arrayet, skal der tjekkes om de opfylder filter-kravet og derefter vises i DOM'en.
+    // for hver projekt i arrayet, skal der tjekkes om de opfylder filter-kravet og derefter vises i DOM'en.
     projekter.forEach((projekt) => {
       if (filter == "alle" || projekt.categories.includes(parseInt(filter))) {
         const klon = template.cloneNode(true);
@@ -285,7 +318,8 @@ function start() {
         klon.querySelector(".projekt_titel").textContent = projekt.title.rendered;
         klon.querySelector(".teaser_tekst").textContent = projekt.teaser_tekst;
         klon.querySelector(".verdensmaal").textContent = projekt.verdensmaal;
-        // tilføjer eventlistner til hvert article-element og lytter efter klik på artiklerne. Funktionen "visDetaljer" bliver kaldt ved klik.
+
+        // tilføjer eventlistner til hvert article-element og lytter efter klik på artiklerne. Ved klik sendes man videre til single-projekt.php
         klon
           .querySelector("article")
           .addEventListener("click", () => {location.href = projekt.link});
@@ -296,22 +330,6 @@ function start() {
     });
   }
 
-  // tilføjer objekter fra arrayet (for hver artist) til popup-vindue. Samt sætter cursor til default, så man ikke tror man kan klikke på elementet igen.
-  function visDetaljer(projekt) {
-    console.log(projekt);
-    // document.querySelector(".nav").style.position = "inherit";
-    article.style.cursor = "default";
-    popup.style.display = "block";
-    popup.querySelector(".billede").src = projekt.billede.guid;
-    popup.querySelector(".billede").style.maxWidth = "50%";
-    // popup.querySelector("iframe").src = artist.lyd;
-    popup.querySelector(".projekt_titel").textContent = projekt.title.rendered;
-    popup.querySelector(".teaser_tekst").textContent = projekt.teaser_tekst;
-    popup.querySelector(".projekt_beskriv").textContent = projekt.beskrivelse_af_projekt;
-    popup.querySelector(".til_laererne").textContent = projekt.til_laererne;
-    popup.querySelector(".til_elever").textContent = projekt.til_elev;
-
-  }
 
   // ved klik på luk-knappen forsvinder popup-vindue
   lukKnap.addEventListener("click", () => (popup.style.display = "none"));
@@ -324,6 +342,20 @@ function start() {
 
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
+  let mobil_viewport = window.matchMedia("(max-width: 600px)");
+  if (mobil_viewport.matches) {
+     window.scrollTo({
+  top: 450,
+  left: 450,
+  behavior: 'smooth'
+});
+  } else{
+     window.scrollTo({
+  top: 150,
+  left: 150,
+  behavior: 'smooth'
+});
+}
 }
 
 

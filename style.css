@@ -32,6 +32,14 @@ Updated: 2022-04-21 11:45:21
   src: url(font/raleway-semibold-webfont.woff2);
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans&display=swap");
+
+.elementor-widget-heading .elementor-heading-title {
+  font-family: "Inter", sans-serif !important;
+}
+
 .premium-blog-entry-meta,
 .entry-meta {
   display: none;
@@ -49,7 +57,7 @@ body:not(.page-layout-sidebar-right) #primary {
 }
 
 p {
-  font-family: Lato, sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif !important;
 }
 
 .site-footer {
@@ -166,4 +174,149 @@ button:hover {
   .mobile-menu-wrapper #sub-menu {
     display: inline !important;
   }
+
+  #content {
+    padding-top: 40px;
+  }
+  .side-nav .navbar-nav ul {
+    display: none;
+    margin-left: 130px;
+  }
+
+  .navbar-nav ul {
+    left: 50%;
+    width: 270px;
+    margin-top: 15px;
+    border: none;
+    transform: translate(-50%, 0);
+  }
+
+  .navbar-nav ul li {
+    border: none;
+    padding: 5px;
+    margin: 7px 0;
+  }
+
+  .navbar-nav li li a {
+    color: #f2f4f6;
+  }
+
+  .navbar-nav > li.current-menu-item > a,
+  .navbar-nav > li.current-menu-parent > a,
+  .navbar-nav > li.current_page_item > a {
+    color: #080073;
+  }
+
+  .side-nav .navbar-nav li.menu-item-has-children > a .svg-icon {
+    float: right;
+    fill: #f2f4f6;
+    height: 26px;
+    width: 26px;
+    margin: 4px 0 0 10px;
+    transition: 0.1s ease color, 0.5s ease transform;
+  }
+}
+
+.site-content-contain {
+  background-color: #f2f4f6;
+}
+
+.elementor-111 .elementor-element.elementor-element-8dc119f .premium-button,
+.elementor-111
+  .elementor-element.elementor-element-8dc119f
+  .premium-button.premium-button-style2-shutinhor::before,
+.elementor-111
+  .elementor-element.elementor-element-8dc119f
+  .premium-button.premium-button-style2-shutinver::before,
+.elementor-111
+  .elementor-element.elementor-element-8dc119f
+  .premium-button-style5-radialin::before,
+.elementor-111
+  .elementor-element.elementor-element-8dc119f
+  .premium-button-style5-rectin::before {
+  background-color: #0277d4;
+  color: #fff;
+  border: none;
+}
+
+.elementor-111
+  .elementor-element.elementor-element-8dc119f
+  .premium-button-none:hover,
+.elementor-111
+  .elementor-element.elementor-element-8dc119f
+  .premium-button-style1::before,
+.elementor-111
+  .elementor-element.elementor-element-8dc119f
+  .premium-button-style2-shutouthor::before,
+.elementor-111
+  .elementor-element.elementor-element-8dc119f
+  .premium-button-style2-shutoutver::before,
+.elementor-111
+  .elementor-element.elementor-element-8dc119f
+  .premium-button-style2-shutinhor,
+.elementor-111
+  .elementor-element.elementor-element-8dc119f
+  .premium-button-style2-shutinver,
+.elementor-111
+  .elementor-element.elementor-element-8dc119f
+  .premium-button-style2-dshutinhor::before,
+.elementor-111
+  .elementor-element.elementor-element-8dc119f
+  .premium-button-style2-dshutinver::before,
+.elementor-111
+  .elementor-element.elementor-element-8dc119f
+  .premium-button-style2-scshutouthor::before,
+.elementor-111
+  .elementor-element.elementor-element-8dc119f
+  .premium-button-style2-scshutoutver::before,
+.elementor-111
+  .elementor-element.elementor-element-8dc119f
+  .premium-button-style3-after:hover,
+.elementor-111
+  .elementor-element.elementor-element-8dc119f
+  .premium-button-style3-before:hover,
+.elementor-111
+  .elementor-element.elementor-element-8dc119f
+  .premium-button-style4-icon-wrapper,
+.elementor-111
+  .elementor-element.elementor-element-8dc119f
+  .premium-button-style5-radialin,
+.elementor-111
+  .elementor-element.elementor-element-8dc119f
+  .premium-button-style5-radialout::before,
+.elementor-111
+  .elementor-element.elementor-element-8dc119f
+  .premium-button-style5-rectin,
+.elementor-111
+  .elementor-element.elementor-element-8dc119f
+  .premium-button-style5-rectout::before,
+.elementor-111
+  .elementor-element.elementor-element-8dc119f
+  .premium-button-style6-bg,
+.elementor-111
+  .elementor-element.elementor-element-8dc119f
+  .premium-button-style6::before {
+  background-color: #e0733f;
+  color: #fff;
+  border: none;
+}
+
+.entry-header {
+  display: none;
+}
+
+.sf-with-ul {
+  cursor: default;
+}
+
+.site-title > a:nth-child(1) {
+  pointer-events: none;
+  cursor: default;
+  font-family: "Inter", sans-serif !important;
+}
+
+.side-nav__scrollable-container {
+  background-color: #23b7d9;
+  color: #f2f4f6;
+  border: 2px solid #147ca6;
 }
